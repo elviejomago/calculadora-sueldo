@@ -1,38 +1,23 @@
 package ec.com.calculadora.sueldo;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertTrue;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
+import org.junit.Test;
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
+import ec.com.calculadora.sueldo.configuracion.ConfiguracionInicial;
+import ec.com.calculadora.sueldo.excepcion.ValorNuloExcepcion;
+import ec.com.calculadora.sueldo.fabrica.FabricaEmpleadoSueldo;
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
-    }
+public class AppTest {
+
+	@Test
+	public void pruebaSueldoEmpleado() {
+		ConfiguracionInicial configuracionInicial = ConfiguracionInicial.inicializar();
+		try {
+			Double sueldo = FabricaEmpleadoSueldo.getSueldoEmpleado("MO10:00-12:00", configuracionInicial);
+			assertTrue("El sueldo del empleado es 30", sueldo == 30.00);
+		} catch (ValorNuloExcepcion e) {}
+		
+	}
+
 }
