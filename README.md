@@ -26,7 +26,7 @@ a continuación un ejemplo
     JORGE=TU09:00-12:00,SA13:00-15:00,SU08:00-21:00
 ```
 
-### CÓdigo de dias
+### Código de dias
 
 ```sh
     LUNES 	- MO
