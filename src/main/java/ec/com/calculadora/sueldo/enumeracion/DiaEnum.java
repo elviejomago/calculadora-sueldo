@@ -25,4 +25,13 @@ public enum DiaEnum {
 	public boolean esFinDeSemana() {
 		return esFinDeSemana;
 	}
+	
+	public static Boolean get(String codigoDia) { 
+        for(DiaEnum dia : values()) {
+            if(dia.getCodigo().equals(codigoDia)) { 
+            	return dia.esFinDeSemana();
+            }
+        }
+        return null;
+    }
 }
