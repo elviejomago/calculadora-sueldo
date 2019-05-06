@@ -4,6 +4,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author jpatino
+ * @version 1.0
+ * 
+ * Utilitario de que contiene metodos para el manejo de fechas.
+ */
 public class FechaUtilitario {
 
 	public static SimpleDateFormat formatoSinHora = new SimpleDateFormat("dd-MM-yyyy");

@@ -2,6 +2,7 @@ package ec.com.calculadora.sueldo.fabrica;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Calendar;
 import java.util.Date;
 
 import ec.com.calculadora.sueldo.configuracion.ConfiguracionInicial;
@@ -12,9 +13,9 @@ import ec.com.calculadora.sueldo.utilitario.ConstanteUtilitario;
 import ec.com.calculadora.sueldo.utilitario.FechaUtilitario;
 import ec.com.calculadora.sueldo.utilitario.ValidadorUtilitario;
 
-public class FabricaEmpleadoSueldo {
+public class FabricaHorarioSueldo {
 
-	private FabricaEmpleadoSueldo() {
+	private FabricaHorarioSueldo() {
 		super();
 	}
 	
@@ -51,11 +52,11 @@ public class FabricaEmpleadoSueldo {
 		Date horarioFin = FechaUtilitario.obtenerFechaActualHora(horario.getHoraFin());
 		Double sueldo = new Double(0);
 		if(horario.isFinDeSemana()) {
-			for (Horario horarioConfiguracion : configuracionInicial.listaHorarioFinDeSemana) {
+			for (Horario horarioConfiguracion : configuracionInicial.getListaHorarioFinDeSemana()) {
 				sueldo += calcularSueldoPorConfiguracion(horarioConfiguracion, horarioInicio, horarioFin);
 			}
 		}else {
-			for (Horario horarioConfiguracion : configuracionInicial.listaHorarioEntreSemana) {
+			for (Horario horarioConfiguracion : configuracionInicial.getListaHorarioEntreSemana()) {
 				sueldo += calcularSueldoPorConfiguracion(horarioConfiguracion, horarioInicio, horarioFin);
 			}
 		}
@@ -87,7 +88,24 @@ public class FabricaEmpleadoSueldo {
 	
 	private static Double calcularValorPorMinuto(Date inicio, Date fin, Double valor, int minutosHorario) {
 		int diferencia = FechaUtilitario.deferenciaEnHoras(inicio, fin);
-		BigDecimal temporalParaCalculo = new BigDecimal(diferencia).multiply(new BigDecimal(valor)).setScale(2, RoundingMode.HALF_UP);
+		int diferenciaAjustada = diferencia + ajusteMinutosAHorario(inicio, fin);
+		BigDecimal temporalParaCalculo = new BigDecimal(diferenciaAjustada).multiply(new BigDecimal(valor)).setScale(2, RoundingMode.HALF_UP);
 		return  temporalParaCalculo.divide(new BigDecimal(minutosHorario), 2, RoundingMode.HALF_UP).setScale(2, RoundingMode.HALF_UP).doubleValue();
+	}
+	
+	private static int ajusteMinutosAHorario(Date inicio, Date fin) {
+		int ajuste = 0;
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(inicio);
+		if(calendario.get(Calendar.MINUTE) == 1) {
+			ajuste++;
+		}
+
+		calendario.setTime(fin);
+		if(calendario.get(Calendar.MINUTE) == 59) {
+			ajuste++;
+		}
+
+		return ajuste;
 	}
 }

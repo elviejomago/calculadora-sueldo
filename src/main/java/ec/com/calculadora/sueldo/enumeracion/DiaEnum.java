@@ -1,5 +1,11 @@
 package ec.com.calculadora.sueldo.enumeracion;
 
+/**
+ * @author jpatino
+ * @version 1.0
+ * 
+ * Enumeracion que contiene el codigo de los dias de la semana y si el dia es o no fin de semana.
+ */
 public enum DiaEnum {
 	
 	MONDAY("MO", false),

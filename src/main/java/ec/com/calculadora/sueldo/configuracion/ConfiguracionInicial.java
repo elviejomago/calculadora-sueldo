@@ -5,10 +5,16 @@ import java.util.List;
 
 import ec.com.calculadora.sueldo.modelo.Horario;
 
+/**
+ * @author jpatino
+ * @version 1.0
+ * 
+ * Configuracion incial de los horarios y el valor a pagar por hora de trabajo.
+ */
 public class ConfiguracionInicial {
 
-	public List<Horario> listaHorarioEntreSemana;
-	public List<Horario> listaHorarioFinDeSemana;
+	private List<Horario> listaHorarioEntreSemana;
+	private List<Horario> listaHorarioFinDeSemana;
 	
 	private ConfiguracionInicial() {
 		super();

@@ -1,5 +1,11 @@
 package ec.com.calculadora.sueldo.modelo;
 
+/**
+ * @author jpatino
+ * @version 1.0
+ * 
+ * Objeto que abstrae los atributos del horario.
+ */
 public class Horario {
 	private String codigoDia;
 	private String horaInicio;
